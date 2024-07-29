@@ -8,7 +8,6 @@ export default function App() {
     <>
     <Search_bar/>
     <Auto_login/>
-    <Auto_search/>
     </>
   )
 }
