@@ -4,7 +4,7 @@
     "beforeBuildCommand": "npm run build",
     "beforeDevCommand": "npm run dev",
     "devPath": "http://localhost:3000",
-    "distDir": "../build"
+    "distDir": "../build"  
   },
   "package": {
     "productName": "login_ui",
@@ -12,8 +12,10 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false
+      "all": true
+      
     },
+    
     "bundle": {
       "active": true,
       "category": "DeveloperTool",
@@ -62,5 +64,6 @@
         "width": 800
       }
     ]
+    
   }
 }
