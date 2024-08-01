@@ -1,18 +1,18 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use reqwest;
+use reqwest::Client;
 use serde_json::Value;
-use tauri::Manager;
+use tauri::command;
 
-#[tauri::command]
-async fn auto_login() -> Result<String, String> {
+#[command]
+async fn auto_login () -> Result<Value, String> {
     let url = "https://freetestapi.com/api/v1/students";
     
     println!("Sending request to: {}", url);
 
-    let response = reqwest::get(url).await.map_err(|e| e.to_string())?;
+    let client = Client::new();
+    let response = client.get(url).send().await.map_err(|e| e.to_string())?;
     
-    println!("Response status: {}", response.status());
 
     if !response.status().is_success() {
         let error_msg = format!("API request failed with status: {}", response.status());
@@ -24,7 +24,11 @@ async fn auto_login() -> Result<String, String> {
     
     println!("Response body: {}", json);
     
-    Ok(json.to_string())
+    if json.is_array() {
+        Ok(json) // Return the JSON array
+    } else {
+        Err("Expected an array but got something else".into())
+    }
 }
 
 fn main() {
@@ -33,3 +37,5 @@ fn main() {
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
+
+

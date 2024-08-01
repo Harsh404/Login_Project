@@ -8,9 +8,14 @@ function AutoLoginComponent() {
   const [error, setError] = useState(null);
 
   const isTauri = typeof window.__TAURI__ !== 'undefined';
+  console.log('Is Tauri present?', typeof window.__TAURI__ !== 'undefined');
+  console.log('isTauri:', isTauri); // Should log 'true' if running in Tauri
 
   const fetchData = async () => {
+    console.log('Fetching data...'); // Log to check if the function is called
+    console.log('isTauri:', isTauri); // Log to check the value of isTauri
     if (isTauri) {
+      console.log('Running in Tauri environment');
       return await invoke('auto_login');
     } else {
       const response = await fetch('https://freetestapi.com/api/v1/students');
