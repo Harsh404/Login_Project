@@ -7,14 +7,27 @@ function AutoLoginComponent() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const isTauri = typeof window.__TAURI__ !== 'undefined';
+
+  const fetchData = async () => {
+    if (isTauri) {
+      return await invoke('auto_login');
+    } else {
+      const response = await fetch('https://freetestapi.com/api/v1/students');
+      if (!response.ok) {
+        throw new Error(`API request failed with status ${response.status}`);
+      }
+      return await response.json();
+    }
+  };
+
   const handleAutoLogin = async () => {
     setLoading(true);
     setError(null);
     try {
-      const result = await invoke('auto_login');
+      const result = await fetchData();
       console.log('Auto login result:', result);
-      const parsedData = JSON.parse(result); // Parse JSON data if it's a string
-      setData(parsedData);
+      setData(result);
     } catch (err) {
       console.error('Auto login error:', err);
       setError(err.toString());
