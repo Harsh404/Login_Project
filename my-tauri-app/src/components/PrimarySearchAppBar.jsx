@@ -140,14 +140,9 @@ export default function PrimarySearchAppBar() {
             >
               <MenuIcon />
             </IconButton> */}
-            <Typography
-              variant="h5"
-              noWrap
-              component="div"
-              className="customTypography"
-            >
-              Hunter Pro
-            </Typography>
+            <div className='logo'>
+              <img src='./images/logo.svg'></img>
+            </div>
             <div className="customSearch">
               <div className="customSearchIconWrapper">
                 <SearchIcon />

@@ -1,0 +1,26 @@
+.sidebar-cont{
+    border: solid black;
+    width: 195px;
+    height: 1198px;
+}
+.main-heading1{
+    width: 62px;
+    height: 15px;
+    margin: 75px 0 0 19px;
+    border: solid black;
+}
+#main-heading-content1{
+    width: 62px;
+    height: 15px;
+    margin: 75px 0 0 19px;
+    font-family: inter;
+    font-size: 12px;
+    font-weight: 400;
+
+}
+.item1{
+    border: solid;
+    height: 38px;
+    margin: 4px 0 0 0;
+    padding: 10px 30px 10px 30px;
+}

@@ -1,71 +1,75 @@
-/* styles/Dashboard.css */
-.customAppBar {
-  background-color: #22506C; /* Primary color */
-}
-
-.customToolbar {
+.navbar{
   display: flex;
-  justify-content: space-between;
+  height: 70px;
+}
+.logo{
+  width: 190px;
+    height: 75px;
+    margin: 5px 0 0 -3px;
+}
+.toolbar{
+  display: flex;
+  width: 255px;
+    height: 40px;
+    margin: 20px 0 0 656px;
 }
 
-.customIconButton {
-  color: red;
-}
-
-.customTypography {
-  display: none;
-}
-
-@media (min-width: 600px) {
-  .customTypography {
-    display: block;
-  }
-}
-
-.customSearch {
-  margin: 0 0 0 118px;
-  width: 369px;
-  border-radius: 8px 8px 8px 8px;
-  position: relative;
-  background-color: rgba(255, 255, 255, 0.974);
-}
-
-.customSearch:hover {
-  background-color: rgba(255, 255, 255, 0.918);
-}
-
-/* @media (min-width: 600px) {
-  .customSearch {
-    margin-left: 24px;
-    width: auto;
-  }
-} */
-
-.customSearchIconWrapper {
-  color: black;
-  padding: 0 16px;
-  height: 100%;
-  position: absolute;
-  pointer-events: none;
+.search-container {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 50px;
 }
 
-.customStyledInputBase {
-  color: inherit;
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 2px solid #ddd;
+  border-radius: 40px;
+  padding: 5px 10px;
+  width: 255px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
   width: 100%;
+  padding: 5px;
+  border-radius: 25px;
 }
 
-.customStyledInputBase .MuiInputBase-input {
-  padding: 8px 8px 8px 0;
-  padding-left: calc(1em + 32px);
-  transition: width 300ms;
-  width: 100%;
+.search-box input::placeholder {
+  color: #aaa;
 }
-
-@media (min-width: 960px) {
-  .customStyledInputBase .MuiInputBase-input {
-    width: 20ch;
-  }
+.msg-icon{
+  width: 40px;
+  height: 40px;
+  margin: 0 0 0 44px;    border-radius: 40px;
+  background: #F5F7FA;
+}
+.noti-icon{
+  width: 40px;
+  height: 40px;
+  margin: 0 0 0 32px;
+  background: #F5F7FA;
+  border-radius: 40px;
+}
+.setting-icon{
+  width: 40px;
+    height: 40px;
+    margin: 0 0 0 32px;
+    background: #F5F7FA;
+    border-radius: 40px;
+}
+.profile-img{
+  width: 60px;
+  height: 60px;
+  border-radius: 40px;
+  margin: -9px 0 0 32px;
+}
+#dp{
+  border-radius: 40px;
+}
+.iconbar{
+  display: flex;
 }
