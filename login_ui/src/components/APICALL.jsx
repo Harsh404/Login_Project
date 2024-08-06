@@ -1,52 +1,70 @@
 import React, { useState } from 'react';
-import { invoke } from '@tauri-apps/api';
-
+import { invoke } from '@tauri-apps/api'; // Correct import for invoke
 
 function APICALL() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);// Initial state is null to differentiate between states
+    const [error, setError] = useState(null);
 
     const isTauri = typeof window.__TAURI__ !== 'undefined';
-    console.log(isTauri)
+    console.log('Is Tauri:', isTauri);
 
     const brwsrdata = async () => {
         if (isTauri) {
-            return await invoke('fetch_data');
-        } else {
-            const response = await fetch('https://freetestapi.com/api/v1/students');
-            if (!response.ok) {
-                throw new Error(`API request failed with status ${response.status}`);
+            try {
+                // Invoke the Rust command
+                return await invoke('fetch_data_from_service');
+            } catch (err) {
+                console.error('Error invoking Tauri command:', err);
+                throw err;
             }
-            return await response.json();
+        } else {
+            try {
+                // Fallback for non-Tauri environment (e.g., development mode)
+                const response = await fetch('http://localhost:5000/api/fetch-data');
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+                return await response.json();
+            } catch (err) {
+                console.error('Error fetching data from server:', err);
+                throw err;
+            }
         }
     };
 
-    const fetchData = async () => {
+    const fetchData = async (filter = false) => {
         setLoading(true);
         setError(null);
         try {
-          const result = await brwsrdata();
-        //   const parsedData = JSON.parse(result); 
-          console.log('Auto login result:', result);
-          if (Array.isArray(result)) {
-            setData(result);
-        } else {
-            console.error('Expected an array but got:', result);
-            setData([]); // Set to empty array if result is not an array
-        }
+            const result = await brwsrdata();
+            console.log('API result:', result);
+            if (Array.isArray(result)) {
+                if (filter) {
+                    const filteredData = result.filter(student => student.age === 20);
+                    setData(filteredData);
+                } else {
+                    setData(result);
+                }
+            } else {
+                console.error('Expected an array but got:', result);
+                setData([]); // Set to empty array if result is not an array
+            }
         } catch (err) {
-          console.error('Auto login error:', err);
-          setError(err.toString());
+            console.error('API error:', err);
+            setError(err.toString());
         } finally {
-          setLoading(false);
+            setLoading(false);
         }
     };
 
     return (
         <div>
-            <button onClick={fetchData} disabled={loading}>
-                {loading ? 'Loading...' : 'Fetch Data'}
+            <button onClick={() => fetchData(false)} disabled={loading}>
+                {loading ? 'Loading...' : 'Fetch All Data'}
+            </button>
+            <button onClick={() => fetchData(true)} disabled={loading}>
+                {loading ? 'Loading...' : 'Fetch Filtered Data'}
             </button>
 
             {error && <p>Error: {error}</p>}
