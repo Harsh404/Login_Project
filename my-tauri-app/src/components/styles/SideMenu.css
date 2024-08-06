@@ -1,0 +1,28 @@
+.sidebar{
+  background: #22506C;
+  height: 631px;
+  width: 106px;
+  text-align: justify;
+}
+#dash-btn{
+  color: white;
+  margin: 0 0 0 8px;
+}
+#myjob-btn{
+  color:white;
+  margin: 0 0 0 18px;
+}
+#msg-btn{
+  color: white;
+  margin: 0 0 0 10px;
+}
+#events-btn{
+  color: white;
+  margin: 0 0 0 -17px;
+  text-align: center;
+}
+#logout-btn{
+  color: white;
+  margin: 0 0 0 15px;
+}
+

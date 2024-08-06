@@ -1,0 +1,71 @@
+/* styles/Dashboard.css */
+.customAppBar {
+  background-color: #22506C; /* Primary color */
+}
+
+.customToolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.customIconButton {
+  color: red;
+}
+
+.customTypography {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .customTypography {
+    display: block;
+  }
+}
+
+.customSearch {
+  margin: 0 0 0 118px;
+  width: 369px;
+  border-radius: 8px 8px 8px 8px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.974);
+}
+
+.customSearch:hover {
+  background-color: rgba(255, 255, 255, 0.918);
+}
+
+/* @media (min-width: 600px) {
+  .customSearch {
+    margin-left: 24px;
+    width: auto;
+  }
+} */
+
+.customSearchIconWrapper {
+  color: black;
+  padding: 0 16px;
+  height: 100%;
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.customStyledInputBase {
+  color: inherit;
+  width: 100%;
+}
+
+.customStyledInputBase .MuiInputBase-input {
+  padding: 8px 8px 8px 0;
+  padding-left: calc(1em + 32px);
+  transition: width 300ms;
+  width: 100%;
+}
+
+@media (min-width: 960px) {
+  .customStyledInputBase .MuiInputBase-input {
+    width: 20ch;
+  }
+}
