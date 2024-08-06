@@ -5,42 +5,48 @@
 
 
 
-use reqwest::Client;
-use serde_json::Value;
+use serde::{Deserialize, Serialize};
 use tauri::command;
+use reqwest::Client;
+use tauri::Manager;
+#[derive(Serialize, Deserialize, Debug)]
+struct Student {
+    id: u32,
+    name: String,
+    age: u32,
+}
+
+type ApiResponse = Vec<Student>;
 
 #[command]
-async fn fetch_data() -> Result<Value, String> {
-    let url = "https://freetestapi.com/api/v1/students";
-    
-    println!("Sending request to: {}", url);
-
+async fn fetch_data_from_service() -> Result<ApiResponse, String> {
     let client = Client::new();
-    let response = client.get(url).send().await.map_err(|e| e.to_string())?;
-    
+    let response = client
+        .get("http://localhost:5000/api/fetch-data")
+        .send()
+        .await
+        .map_err(|e| e.to_string())?
+        .text()
+        .await
+        .map_err(|e| e.to_string())?;
 
-    if !response.status().is_success() {
-        let error_msg = format!("API request failed with status: {}", response.status());
-        println!("Error: {}", error_msg);
-        return Err(error_msg);
-    }
-    
-    let json: Value = response.json().await.map_err(|e| e.to_string())?;
-    
-    println!("Response body: {}", json);
-    
-    if json.is_array() {
-        Ok(json) // Return the JSON array
-    } else {
-        Err("Expected an array but got something else".into())
-    }
+    let data: ApiResponse = serde_json::from_str(&response).map_err(|e| e.to_string())?;
+    Ok(data)
 }
 
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![fetch_data])
-        .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+    .invoke_handler(tauri::generate_handler![fetch_data_from_service])
+    .setup(|app| {
+        let window = app.get_window("main").unwrap();
+        
+        // Example of emitting an event
+        window.emit("my-window-event", "Event payload").unwrap();
+        
+        Ok(())
+    })
+    .run(tauri::generate_context!())
+    .expect("error while running tauri application");
 }
 
