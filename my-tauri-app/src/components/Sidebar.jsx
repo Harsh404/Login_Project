@@ -1,53 +1,94 @@
-import React from 'react'
-import '../components/styles/Sidebar.css'
+import React, { useState } from 'react';
+import '../components/styles/Sidebar.css';
+import { FaQuestionCircle, FaVideo, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { MdDashboard, MdHistory, MdNavigateBefore, MdOutlineNavigateNext } from "react-icons/md";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { BsSuitcaseLg } from "react-icons/bs";
+import { BiSolidBriefcaseAlt2 } from "react-icons/bi";
+import { IoPeopleSharp } from "react-icons/io5";
+import { GrDocumentText } from "react-icons/gr";
+import { HiOutlineCurrencyDollar, HiOutlineDocumentDuplicate } from "react-icons/hi";
 
-export default function Sidebar() {
+const Sidebar = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
   return (
-    <div className='sidebar-cont'>
-            <p id='main-heading-content1'>OVERVIEW</p>
-        
-        <div className='item1'>
-            <div className='item-1-logo1'></div>
-            <div className='item-1-content1'></div>
+    <>
+      <button className={`toggle-button ${isCollapsed ? 'collapsed' : ''}`} onClick={toggleSidebar}>
+        {isCollapsed ? <MdOutlineNavigateNext /> : <MdNavigateBefore />}
+      </button>
+
+      <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+        <div className="sidebar-content">
+          <div className="sidebar-menu">
+            <div className="menu-section">
+              <h3>OVERVIEW</h3>
+              <div className="menu-item">
+                <MdDashboard />
+                {!isCollapsed && <span>Dashboard</span>}
+              </div>
+            </div>
+            <div className="menu-section">
+              <h3>JOBS</h3>
+              <div className="menu-item">
+                <IoIosAddCircleOutline />
+                {!isCollapsed && <span>Post Job</span>}
+              </div>
+              <div className="menu-item">
+                <BsSuitcaseLg />
+                {!isCollapsed && <span>Active Jobs</span>}
+              </div>
+              <div className="menu-item">
+                <BiSolidBriefcaseAlt2 />
+                {!isCollapsed && <span>Closed Jobs</span>}
+              </div>
+            </div>
+            <div className="menu-section">
+              <h3>CANDIDATES</h3>
+              <div className="menu-item">
+                <IoPeopleSharp />
+                {!isCollapsed && <span>Source Talent</span>}
+              </div>
+              <div className="menu-item">
+                <GrDocumentText />
+                {!isCollapsed && <span>Applicants</span>}
+              </div>
+            </div>
+            <div className="menu-section">
+              <h3>SUBSCRIPTION</h3>
+              <div className="menu-item">
+                <HiOutlineCurrencyDollar />
+                {!isCollapsed && <span>Subscription Plans</span>}
+              </div>
+              <div className="menu-item">
+                <MdHistory />
+                {!isCollapsed && <span>Payment History</span>}
+              </div>
+            </div>
+            <div className="menu-section">
+              <h3>RESOURCES</h3>
+              <div className="menu-item">
+                <FaQuestionCircle />
+                {!isCollapsed && <span>Help Center</span>}
+              </div>
+              <div className="menu-item">
+                <HiOutlineDocumentDuplicate />
+                {!isCollapsed && <span>Documentation</span>}
+              </div>
+              <div className="menu-item">
+                <FaVideo />
+                {!isCollapsed && <span>Tutorial</span>}
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <div className='main-heading2'>
-            <div className='item2'>
-                <div className='item2-logo1'></div>
-                <div className='item2-content1'></div>
-            </div>
-            <div className='item3'>
-                <div className='item3-logo2'></div>
-                <div className='item3-content2'></div>
-            </div>
-            <div className='item4'>
-                <div className='item4-logo3'></div>
-                <div className='item4-content3'></div>
-            </div>
-        </div>
-        <div className='main-heading3'>
-            <div className='item5'>
-                <div className='item5-logo5'></div>
-                <div className='item5-content5'></div>
-            </div>
-            <div className='item6'>
-                <div className='item6-logo1'></div>
-                <div className='item6-content1'></div>
-            </div>
-        </div>
-        <div className='main-heading4'>
-            <div className='item4'>
-                <div className='logo4'></div>
-                <div className='content4'></div>
-            </div>
-        </div>
-        <div className='main-heading5'>
-            <div className='item5'>
-                <div className='logo5'></div>
-                <div className='content5'></div>
-            </div>
-        </div>
-      
-    </div>
-  )
-}
+      </div>
+    </>
+  );
+};
+
+export default Sidebar;
