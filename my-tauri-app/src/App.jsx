@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard'
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import JobForm from './components/JobForm'
+import Graph from './components/Graph'
 
 export default function App() {
   return (
@@ -12,8 +13,8 @@ export default function App() {
     <Navbar/>
     <div className='body-cont'>
       <div className='sidebar-cont'>
-        {/* <JobForm/> */}
         <Sidebar/>
+        {/* <Graph/> */}
       </div>
       <div className='dashboard-cont'>
         <Dashboard/>

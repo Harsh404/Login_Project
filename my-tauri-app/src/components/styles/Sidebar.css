@@ -5,12 +5,12 @@
   padding: 20px;
   transition: width 0.3s ease;
   position: relative;
-  overflow: hidden; /* Hide overflow */
+  overflow: hidden; 
 }
 
 .sidebar.collapsed {
-  width: 0; /* Hide the sidebar when collapsed */
-  padding: 0; /* Remove padding */
+  width: 0; 
+  padding: 0; 
 }
 
 .sidebar-content {
@@ -19,7 +19,7 @@
 }
 
 .sidebar.collapsed .sidebar-content {
-  display: none; /* Hide the content when collapsed */
+  display: none; 
 }
 
 .menu-item {
@@ -33,6 +33,11 @@
 
 .menu-item:hover {
   color: #000;
+  background-color: #f8f9fa;
+}
+
+.menu-item:hover .icon {
+  color: #0d6efd;
 }
 
 .menu-item span {
@@ -69,5 +74,5 @@
 }
 
 .sidebar.collapsed ~ .toggle-button {
-  right: 10px; /* Position inside the view */
+  right: 10px;
 }
