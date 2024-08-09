@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../components/styles/Sidebar.css';
-import { FaQuestionCircle, FaVideo, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { FaQuestionCircle, FaVideo } from 'react-icons/fa';
 import { MdDashboard, MdHistory, MdNavigateBefore, MdOutlineNavigateNext } from "react-icons/md";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { BsSuitcaseLg } from "react-icons/bs";
@@ -17,11 +17,7 @@ const Sidebar = () => {
   };
 
   return (
-    <>
-      <button className={`toggle-button ${isCollapsed ? 'collapsed' : ''}`} onClick={toggleSidebar}>
-        {isCollapsed ? <MdOutlineNavigateNext /> : <MdNavigateBefore />}
-      </button>
-
+    <div className="sidebar-wrapper">
       <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
         <div className="sidebar-content">
           <div className="sidebar-menu">
@@ -86,8 +82,11 @@ const Sidebar = () => {
             </div>
           </div>
         </div>
+        <button className="toggle-button" onClick={toggleSidebar}>
+          {isCollapsed ? <MdOutlineNavigateNext /> : <MdNavigateBefore />}
+        </button>
       </div>
-    </>
+    </div>
   );
 };
 
